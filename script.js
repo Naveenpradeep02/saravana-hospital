@@ -317,3 +317,339 @@ window.addEventListener("resize", () => {
 
 init();
 animate();
+
+// ====================
+
+const facilityItems = document.querySelectorAll(".facilities-item");
+const detail = document.getElementById("facilityDetail");
+
+facilityItems.forEach((item) => {
+  item.addEventListener("click", () => {
+    facilityItems.forEach((i) => i.classList.remove("is-active"));
+    item.classList.add("is-active");
+
+    /* 🔥 BACKGROUND COLOR SYNC */
+    detail.style.background = item.dataset.color;
+
+    const list = item.dataset.items.split(",");
+
+    detail.style.opacity = 0;
+    detail.style.transform = "translateY(6px)";
+
+    setTimeout(() => {
+      detail.innerHTML = `<div class="background-gray"> 
+        <h2 class="facilities-detail__title">
+          <div class="facilities-detail__icon">⚕</div>
+          ${item.dataset.title}
+        </h2>
+        <p>${item.dataset.desc}</p></div>
+        <h3>What's Included:</h3>
+        <ul>${list.map((l) => `<li>${l.trim()}</li>`).join("")}</ul>
+        <div class="facilities-detail__actions">
+          <button class="facilities-detail__btn btn-white">View Pediatric</button>
+          <button class="facilities-detail__btn btn-green">View Adult</button>
+        </div>
+      `;
+      detail.style.opacity = 1;
+      detail.style.transform = "translateY(0)";
+    }, 200);
+  });
+});
+// =================================================
+
+let isMobile = window.innerWidth <= 768;
+
+const cards = Array.from(document.querySelectorAll(".card"));
+const lTitle = document.getElementById("lTitle");
+const lDesc = document.getElementById("lDesc");
+
+let isAnimating = false;
+
+const X_STEP = 30;
+const Z_STEP = 50;
+const OPACITY_STEP = 0.1;
+
+const EXIT_X = window.innerWidth <= 768 ? -280 : -520;
+const EXIT_Z = -1200;
+const DURATION = 900;
+
+function applyStack() {
+  cards.forEach((card, i) => {
+    const x = i * X_STEP;
+    const z = i * Z_STEP;
+    const opacity = 1 - i * OPACITY_STEP;
+
+    card.style.transition =
+      "transform 0.8s cubic-bezier(.4,0,.2,1), opacity 0.8s ease";
+
+    if (isMobile) {
+      card.style.transform = "none";
+    } else {
+      card.style.transform = `
+    translateX(${x}px)
+    translateZ(${-z}px)
+  `;
+    }
+
+    card.style.opacity = opacity;
+    card.style.zIndex = 100 - i;
+  });
+
+  /* COLOR SYNC */
+  const activeColor = cards[0].dataset.color || "#4f9648";
+  document.documentElement.style.setProperty("--accent", activeColor);
+
+  lTitle.innerText = cards[0].dataset.title;
+  lDesc.innerText = cards[0].dataset.desc;
+
+  function darkenColor(color, percent) {
+    const num = parseInt(color.replace("#", ""), 16),
+      amt = Math.round(2.55 * percent),
+      R = (num >> 16) - amt,
+      G = ((num >> 8) & 0x00ff) - amt,
+      B = (num & 0x0000ff) - amt;
+
+    return (
+      "#" +
+      (
+        0x1000000 +
+        (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
+        (G < 255 ? (G < 1 ? 0 : G) : 255) * 0x100 +
+        (B < 255 ? (B < 1 ? 0 : B) : 255)
+      )
+        .toString(16)
+        .slice(1)
+    );
+  }
+
+  const darkColor = darkenColor(activeColor.trim(), 30);
+
+  document.querySelectorAll(".card h2").forEach((h) => {
+    h.style.color = darkColor;
+  });
+
+  lTitle.style.color = darkColor;
+}
+
+function next() {
+  if (isAnimating) return;
+  isAnimating = true;
+
+  const front = cards[0];
+
+  front.style.transition =
+    "transform 0.9s cubic-bezier(.22,1,.36,1), opacity 0.9s ease";
+
+  front.style.transform = `
+    translateX(${EXIT_X}px)
+    translateZ(${EXIT_Z}px)
+  `;
+
+  front.style.opacity = 1;
+
+  setTimeout(() => {
+    cards.push(cards.shift());
+
+    const backIndex = cards.length - 1;
+    const backCard = cards[backIndex];
+
+    backCard.style.transition = "none";
+
+    backCard.style.transform = `
+      translateX(${backIndex * X_STEP}px)
+      translateZ(${-backIndex * Z_STEP}px)
+    `;
+
+    backCard.style.opacity = 1 - backIndex * OPACITY_STEP;
+
+    requestAnimationFrame(() => {
+      applyStack();
+      isAnimating = false;
+    });
+  }, DURATION);
+}
+
+function prev() {
+  if (isAnimating) return;
+  isAnimating = true;
+
+  const last = cards[cards.length - 1];
+  cards.unshift(cards.pop());
+
+  last.style.transition = "none";
+
+  last.style.transform = `
+    translateX(${EXIT_X}px)
+    translateZ(${EXIT_Z}px)
+  `;
+
+  last.style.opacity = 1;
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      applyStack();
+      isAnimating = false;
+    });
+  });
+}
+
+document.getElementById("next").onclick = () => {
+  next();
+  resetAuto();
+};
+
+document.getElementById("prev").onclick = () => {
+  prev();
+  resetAuto();
+};
+
+let auto1 = setInterval(next, 9200);
+
+function resetAuto() {
+  clearInterval(auto1);
+  auto1 = setInterval(next, 9200);
+}
+
+applyStack();
+
+const services = [
+  {
+    title: "General Medicine",
+    link: "#",
+    left: "Sometimes you just need a doctor who can figure out what's wrong. Our general physicians handle everything from fever and infections to chronic conditions like diabetes and hypertension, giving you clear answers and practical treatment.",
+    right: [
+      "Diabetes & Thyroid Management",
+      "Hypertension & Heart Health",
+      "Fever, Infections & Viral Illnesses",
+      "Health Check-Ups & Preventive Care",
+      "Same-Day Appointments Available for Urgent Cases",
+    ],
+    cta: "See a General Physician",
+    img: "./img/Medical 3d.png",
+    color: "#4d6eb0",
+  },
+  {
+    title: "Dermatology",
+    link: "#",
+    left: "Skin problems can affect how you feel about yourself. Our dermatologists treat everything from stubborn acne to serious skin conditions, helping you look better and feel more confident in your own skin.",
+    right: [
+      "Acne, Pigmentation & Scar Treatment",
+      "Hair Fall & Scalp Disorders",
+      "Eczema, Psoriasis & Skin Allergies",
+      "Cosmetic Dermatology Procedures",
+      "Advanced Skin Analysis & Personalized Treatment Plans",
+    ],
+    cta: "Book Your Skin Consultation",
+    img: "./img/Dermatology 3D.png",
+    color: "#bd80b8",
+  },
+
+  {
+    title: "Surgical Specialties",
+    link: "#",
+    left: "From minor procedures to major operations, our surgical team brings years of experience to the table. We handle everything with precision, using modern techniques that mean faster recovery and less discomfort for you.",
+    right: [
+      "General Surgery (Appendix, Hernia, Gallbladder)",
+      "Laparoscopic Procedures",
+      "Trauma & Accident Care",
+      "Wound Management",
+      "Advanced Operation Theaters with Post-Op ICU Care",
+    ],
+    cta: "Book a Surgical Consultation",
+    img: "./img/Surgery 3d.png",
+    color: "#fdd82a",
+  },
+  {
+    title: "Maternity & Fertility",
+    link: "#",
+    left: "Bringing a baby into the world is special, and we treat it that way. Whether you're planning pregnancy, expecting, or need fertility support, our maternity team guides you through every step with care and expertise.",
+    right: [
+      "Normal & Cesarean Deliveries",
+      "High-Risk Pregnancy Management",
+      "Fertility Consultations & Treatment",
+      "Prenatal & Postnatal Care",
+      "24/7 Delivery Suite with Experienced Obstetricians",
+    ],
+    cta: "Talk to Our Maternity Team",
+    img: "./img/OBG 3D.png",
+    color: "#48388d",
+  },
+  {
+    title: "Pediatrics",
+    link: "#",
+    left: "Kids aren't just small adults—they need doctors who understand growing bodies and worried parents. Our pediatricians treat your child with gentle care while keeping you informed every step of the way.",
+    right: [
+      "Newborn & Infant Care",
+      "Childhood Vaccinations (Complete Schedule)",
+      "Growth & Development Monitoring",
+      "Common Childhood Illnesses",
+      "Child-Friendly Environment with Experienced Pediatricians",
+    ],
+    cta: "Bring Your Child In",
+    img: "./img/pediatric 3d.png",
+    color: "#fa6880",
+  },
+  {
+    title: "ENT (Ear, Nose & Throat)",
+    link: "#",
+    left: "Trouble hearing? Constant sinus headaches? Throat pain that won't quit? Our ENT specialists diagnose and treat conditions affecting your ears, nose, and throat so you can breathe easier, hear better, and feel relief.",
+    right: [
+      "Sinusitis & Nasal Blockage",
+      "Ear Infections & Hearing Problems",
+      "Tonsillitis & Throat Disorders",
+      "Voice & Sleep Apnea Issues",
+      "In-House Endoscopy & Audiometry Testing",
+    ],
+    cta: "Get ENT Relief Today",
+    img: "./img/ENT 3DD.png",
+    color: "#4b9342",
+  },
+];
+
+const hexBlocks = document.querySelectorAll(".hex-service-block");
+const leftText = document.querySelector(".inner-left-service p");
+const rightList = document.querySelector(".inner-right-service ul");
+const middleImg = document.querySelector(".inner-middle-img img");
+const ctaBtn = document.querySelector(".middle-service-btn");
+const leftBg = document.querySelector(".bg-inner-section-left");
+const rightBg = document.querySelector(".bg-inner-section-right");
+const middleHex = document.querySelector(".service-middle-img");
+
+function updateService(index) {
+  const data = services[index];
+
+  leftText.textContent = data.left;
+
+  rightList.innerHTML = "";
+  data.right.forEach((item) => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    rightList.appendChild(li);
+  });
+
+  middleImg.src = data.img;
+  ctaBtn.textContent = data.cta;
+  ctaBtn.href = data.link;
+
+  leftBg.style.backgroundColor = data.color;
+  rightBg.style.backgroundColor = data.color;
+  middleHex.style.backgroundColor = data.color;
+
+  hexBlocks.forEach((hex) => hex.classList.remove("active"));
+  hexBlocks[index].classList.add("active");
+}
+
+hexBlocks.forEach((hex, index) => {
+  hex.addEventListener("click", () => {
+    updateService(index);
+  });
+});
+
+// Entrance Animation
+window.addEventListener("load", () => {
+  document.querySelector(".main-service-content").style.transition =
+    "all 0.6s ease";
+  document.querySelector(".main-service-content").style.opacity = "1";
+  document.querySelector(".main-service-content").style.transform =
+    "translateY(0)";
+});
