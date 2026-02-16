@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Slider Centered</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial;
+      }
+
+      body {
+        background: #f2f2f2;
+      }
+
+      /* ===== YOUR UI ===== */
+
+      .about-section {
+        padding: 100px 80px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+      }
+
+      .about-highlight {
+        background: #3580b9;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 20px;
+        width: fit-content;
+      }
+
+      .left-about h2 {
+        font-size: 40px;
+        margin: 15px 0;
+      }
+
+      #aboutText {
+        color: #555;
+        line-height: 1.6;
+      }
+
+      /* ===== 5-slot strip ===== */
+
+      .about-img-slider {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 30px;
+        margin-top: 30px;
+      }
+
+      /* slots (fixed = 5 only) */
+      .slide-img {
+        width: 100px;
+        height: 140px;
+        border-radius: 20px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: 0.35s;
+        background: #ccc;
+        opacity: 0.5;
+        transform: scale(0.9);
+      }
+
+      .slide-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* center active */
+      .slide-img.active {
+        opacity: 1;
+        transform: scale(1.2);
+        outline: 3px solid #3580b9;
+      }
+
+      /* stagger look preserved */
+      .slide-img.pos-0 {
+        margin-bottom: 50px;
+      }
+      .slide-img.pos-1 {
+        margin-bottom: 80px;
+      }
+      .slide-img.pos-2 {
+        margin-bottom: 120px;
+      }
+      .slide-img.pos-3 {
+        margin-bottom: 80px;
+      }
+      .slide-img.pos-4 {
+        margin-bottom: 50px;
+      }
+
+      /* right image */
+
+      .about-main-img {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #7f83874f;
+        border-radius: 40px;
+        padding: 30px;
+      }
+
+      .about-main-img img {
+        width: 80%;
+        border-radius: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="about-section">
+      <div class="left-about">
+        <div class="about-highlight">About Us</div>
+        <h2>Healthcare You Can Trust,<br />Right Here in Chennai</h2>
+        <p id="aboutText"></p>
+
+        <!-- only 5 slots -->
+        <div class="about-img-slider" id="thumbStrip"></div>
+      </div>
+
+      <div class="right-about">
+        <div class="about-main-img">
+          <img id="mainImg" />
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* ===== DATA ===== */
+      const slides = [
+        {
+          img: "https://picsum.photos/seed/1/600/800",
+          text: "Saravana Hospital isn't just another multi-specialty hospital in Chennai.We're the place families trust when health matters most. Since [Year], we've built our reputation one patient at a time—through honest conversations, accurate diagnosis, and treatment plans that respect both your body and your budget.We don't believe in rushing appointments or using complicated medical terms. Our doctors take time to listen, explain clearly, and involve you in every decision about your health.",
+        },
+        {
+          img: "https://picsum.photos/seed/2/600/800",
+          text: "Our pediatric team focuses on safe, gentle, and evidence-based treatment for children of all ages.",
+        },
+        {
+          img: "https://picsum.photos/seed/3/600/800",
+          text: "We use modern diagnostic tools to reduce guesswork and speed up accurate medical decisions.",
+        },
+        {
+          img: "https://picsum.photos/seed/4/600/800",
+          text: "Every consultation is unhurried — doctors explain clearly before prescribing anything.",
+        },
+        {
+          img: "https://picsum.photos/seed/5/600/800",
+          text: "Emergency services are available with trained staff and rapid response protocols.",
+        },
+        {
+          img: "https://picsum.photos/seed/6/600/800",
+          text: "Affordable treatment options are discussed openly — no surprise billing practices.",
+        },
+        {
+          img: "https://picsum.photos/seed/7/600/800",
+          text: "We support preventive healthcare through regular screening and wellness programs.",
+        },
+        {
+          img: "https://picsum.photos/seed/8/600/800",
+          text: "Our specialists collaborate across departments for complex case management.",
+        },
+        {
+          img: "https://picsum.photos/seed/9/600/800",
+          text: "Clean, patient-friendly facilities designed to reduce stress during treatment.",
+        },
+        {
+          img: "https://picsum.photos/seed/10/600/800",
+          text: "Lab services provide fast and reliable reports for quicker treatment decisions.",
+        },
+        {
+          img: "https://picsum.photos/seed/11/600/800",
+          text: "Cardiac and diabetes care programs are structured for long-term monitoring.",
+        },
+        {
+          img: "https://picsum.photos/seed/12/600/800",
+          text: "Women’s health and maternity care handled with privacy and specialized support.",
+        },
+        {
+          img: "https://picsum.photos/seed/13/600/800",
+          text: "Senior citizen care includes medication review and lifestyle management.",
+        },
+        {
+          img: "https://picsum.photos/seed/14/600/800",
+          text: "Digital medical records ensure continuity across visits and departments.",
+        },
+        {
+          img: "https://picsum.photos/seed/15/600/800",
+          text: "Insurance and billing assistance available at the help desk.",
+        },
+        {
+          img: "https://picsum.photos/seed/16/600/800",
+          text: "Surgical units follow strict sterilization and safety standards.",
+        },
+        {
+          img: "https://picsum.photos/seed/17/600/800",
+          text: "Community outreach programs promote early detection and awareness.",
+        },
+        {
+          img: "https://picsum.photos/seed/18/600/800",
+          text: "Our mission is simple — clear communication, correct treatment, consistent follow-up.",
+        },
+      ];
+
+      /* ===== BUILD 5 FIXED SLOTS ===== */
+
+      const strip = document.getElementById("thumbStrip");
+
+      for (let i = 0; i < 5; i++) {
+        const d = document.createElement("div");
+        d.className = "slide-img";
+        strip.appendChild(d);
+      }
+
+      const slots = document.querySelectorAll(".slide-img");
+      const mainImg = document.getElementById("mainImg");
+      const aboutText = document.getElementById("aboutText");
+
+      let centerIndex = 0;
+      let timer;
+
+      /* ===== RENDER WINDOW OF 5 ===== */
+
+      function render() {
+        slots.forEach((slot, pos) => {
+          // position relative to center
+          const offset = pos - 2; // center slot = 2
+          let slideIndex =
+            (centerIndex + offset + slides.length) % slides.length;
+
+          slot.innerHTML = `<img src="${slides[slideIndex].img}">`;
+
+          slot.className = "slide-img pos-" + pos;
+          if (pos === 2) slot.classList.add("active");
+
+          slot.onclick = () => {
+            centerIndex = slideIndex;
+            render();
+            restartAuto();
+          };
+        });
+
+        mainImg.src = slides[centerIndex].img;
+        aboutText.textContent = slides[centerIndex].text;
+      }
+
+      /* ===== AUTO ===== */
+
+      function next() {
+        centerIndex = (centerIndex + 1) % slides.length;
+        render();
+      }
+
+      function restartAuto() {
+        clearInterval(timer);
+        timer = setInterval(next, 2500);
+      }
+
+      /* ===== INIT ===== */
+
+      render();
+      restartAuto();
+    </script>
+  </body>
+</html>
