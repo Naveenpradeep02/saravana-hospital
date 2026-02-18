@@ -1,3 +1,52 @@
+class MenuComponent {
+  constructor(menuSelector, triggerSelector) {
+    this.menu = document.querySelector(menuSelector);
+    this.trigger = document.querySelector(triggerSelector);
+    this.hamburger = document.querySelector(".hamburger");
+    this.navLinks = document.querySelector(".nav-links");
+
+    this.bindEvents();
+  }
+
+  bindEvents() {
+    // Toggle Services Menu
+    this.trigger.addEventListener("click", (e) => {
+      e.stopPropagation();
+      this.menu.classList.toggle("active");
+    });
+
+    // Click outside to close
+    document.addEventListener("click", (e) => {
+      if (!this.menu.contains(e.target) && !this.trigger.contains(e.target)) {
+        this.menu.classList.remove("active");
+      }
+    });
+
+    // Close when clicking overlay background only
+    this.menu.addEventListener("click", (e) => {
+      if (e.target === this.menu) {
+        this.menu.classList.remove("active");
+      }
+    });
+
+    // ESC key close
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        this.menu.classList.remove("active");
+      }
+    });
+
+    // Hamburger toggle
+    if (this.hamburger) {
+      this.hamburger.addEventListener("click", () => {
+        this.navLinks.classList.toggle("active");
+      });
+    }
+  }
+}
+
+new MenuComponent(".sub-menu", ".services-btn");
+
 /* cache elements */
 const entryOverlay = document.getElementById("entryOverlay");
 const home = document.getElementById("home");
@@ -9,6 +58,11 @@ const welcomeLogo = document.getElementById("welcomeLogo");
 if (sessionStorage.getItem("entryDone")) {
   entryOverlay.style.display = "none";
   home.style.opacity = 1;
+
+  // 🔥 trigger hex animation on reload
+  setTimeout(() => {
+    startHexAnimation();
+  }, 200);
 } else {
   sessionStorage.setItem("entryDone", "1");
 
@@ -81,7 +135,32 @@ if (sessionStorage.getItem("entryDone")) {
   /* fade overlay */
   tl.to("#entryOverlay", { opacity: 0, duration: 0.6 });
   tl.set("#entryOverlay", { display: "none" });
-  tl.to("#home", { opacity: 1, duration: 0.6 });
+  // tl.to("#home", { opacity: 1, duration: 0.6 });
+  tl.to("#home", {
+    opacity: 1,
+    duration: 0.6,
+    onComplete: startHexAnimation,
+  });
+}
+
+// ==================
+function startHexAnimation() {
+  const allHex = document.querySelectorAll(".hexagon");
+  const centerHex = document.querySelector(".middle-hexagon .hex-4");
+
+  const outerHex = [...allHex].filter((hex) => hex !== centerHex);
+
+  // Direction-based stagger
+  outerHex.forEach((hex, index) => {
+    setTimeout(() => {
+      hex.classList.add("show");
+    }, index * 120);
+  });
+
+  // Center zoom bounce after outer
+  setTimeout(() => {
+    centerHex.style.animation = "centerZoomBounce 1s ease forwards";
+  }, outerHex.length * 120 + 300);
 }
 
 /* ===== about us===== */
@@ -503,11 +582,11 @@ document.getElementById("prev").onclick = () => {
   resetAuto();
 };
 
-let auto1 = setInterval(next, 9200);
+let auto1 = setInterval(next, 9000);
 
 function resetAuto() {
   clearInterval(auto1);
-  auto1 = setInterval(next, 9200);
+  auto1 = setInterval(next, 9000);
 }
 
 applyStack();
@@ -645,11 +724,11 @@ hexBlocks.forEach((hex, index) => {
   });
 });
 
-// Entrance Animation
-window.addEventListener("load", () => {
-  document.querySelector(".main-service-content").style.transition =
-    "all 0.6s ease";
-  document.querySelector(".main-service-content").style.opacity = "1";
-  document.querySelector(".main-service-content").style.transform =
-    "translateY(0)";
-});
+// // Entrance Animation
+// window.addEventListener("load", () => {
+//   document.querySelector(".main-service-content").style.transition =
+//     "all 0.6s ease";
+//   document.querySelector(".main-service-content").style.opacity = "1";
+//   document.querySelector(".main-service-content").style.transform =
+//     "translateY(0)";
+// });

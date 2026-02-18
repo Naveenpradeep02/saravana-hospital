@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Slider Centered</title>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Staatliches&display=swap");
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Poppins", sans-serif;
+        background: #e7e7e7;
+        overflow-x: hidden;
+        line-height: 1;
+        position: relative;
+      }
+      .hero {
+        position: relative;
+        max-width: 100%;
+        height: 75vh;
+        font-size: 40px;
+      }
+      .overlay-dot {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 35%;
+      }
+      .overlay-block {
+        position: absolute;
+        top: 70%;
+        width: 35%;
+      }
+      .left-block {
+        left: -35%;
+        transform: translate(50%, -50%);
+      }
+      .right-block {
+        right: -35%;
+        transform: translate(-50%, -50%);
+      }
+      .hero-content {
+        position: relative;
+        z-index: 10;
+      }
+
+      .hexagon-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        margin-top: 100px;
+        margin-left: 80px;
+      }
+
+      .top-hexagon,
+      .middle-hexagon,
+      .third-hexagon,
+      .bottom-hexagon {
+        position: relative;
+      }
+      .top-hexagon .hex-1 {
+        position: absolute;
+        top: 60px;
+        left: 22%;
+      }
+      .top-hexagon .hex-2 {
+        position: absolute;
+        top: 0px;
+        left: 28%;
+      }
+      .top-hexagon .hex-3 {
+        position: absolute;
+        top: 60px;
+        left: 35%;
+      }
+      .top-hexagon .hex-4 {
+        position: absolute;
+        top: 0px;
+        left: 42%;
+      }
+      .top-hexagon .hex-5 {
+        position: absolute;
+        top: 60px;
+        left: 49%;
+      }
+      .top-hexagon .hex-6 {
+        position: absolute;
+        top: 0px;
+        left: 56%;
+      }
+      .top-hexagon .hex-7 {
+        position: absolute;
+        top: 60px;
+        left: 63%;
+      }
+
+      .middle-hexagon .hex-2 {
+        position: absolute;
+        top: 120px;
+        left: 28%;
+      }
+      .middle-hexagon .hex-3 {
+        position: absolute;
+        top: 180px;
+        left: 35%;
+      }
+      .middle-hexagon .hex-4 {
+        width: 180px;
+        height: 160px;
+        position: absolute;
+        top: 90px;
+        left: 40%;
+        z-index: 100;
+      }
+      .middle-hexagon .hex-4 .inner-hex {
+        width: 160px;
+        height: 140px;
+      }
+      .middle-hexagon .hex-5 {
+        position: absolute;
+        top: 180px;
+        left: 49%;
+      }
+      .middle-hexagon .hex-6 {
+        position: absolute;
+        top: 120px;
+        left: 56%;
+      }
+      .third-hexagon .hex-3 {
+        position: absolute;
+        top: 300px;
+        left: 35%;
+      }
+      .third-hexagon .hex-4 {
+        position: absolute;
+        top: 245px;
+        left: 42%;
+      }
+      .third-hexagon .hex-5 {
+        position: absolute;
+        top: 300px;
+        left: 49%;
+      }
+
+      .bottom-hexagon .hex-4 {
+        width: 140px;
+        height: 120px;
+        position: absolute;
+        top: 360px;
+        left: 41.3%;
+      }
+      .bottom-hexagon .hex-4 .inner-hex {
+        width: 120px;
+        height: 100px;
+      }
+
+      .hexagon {
+        width: 120px;
+        height: 100px;
+        background: linear-gradient(135deg, #7f8387, #cbcbcd);
+        clip-path: polygon(
+          25% 0%,
+          75% 0%,
+          100% 50%,
+          75% 100%,
+          25% 100%,
+          0% 50%
+        );
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .inner-hex {
+        width: 110px;
+        height: 90px;
+        clip-path: polygon(
+          25% 0%,
+          75% 0%,
+          100% 50%,
+          75% 100%,
+          25% 100%,
+          0% 50%
+        );
+        background-color: #e1f6fb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .inner-hex img {
+        width: 75%;
+      }
+
+      .hex-1 .inner-hex,
+      .hex-7 .inner-hex {
+        width: 90px;
+        height: 70px;
+      }
+      .top-hexagon .hex-3 {
+        background: linear-gradient(135deg, #e3ae00, #f7e500);
+      }
+      .top-hexagon .hex-4 {
+        background: linear-gradient(135deg, #55ea07, #61cc2e);
+      }
+      .top-hexagon .hex-5 {
+        background: linear-gradient(135deg, #38a5f8, #3580b9);
+      }
+
+      .middle-hexagon .hex-3 {
+        background: linear-gradient(135deg, #644e9f, #644e9f);
+      }
+
+      .middle-hexagon .hex-5 {
+        background: linear-gradient(135deg, #d15497, #d15497);
+      }
+      .third-hexagon .hex-4 {
+        background: linear-gradient(135deg, #da63df, #a74e9a);
+      }
+
+      .top-hexagon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* .hex-1,
+      .hex-3,
+      .hex-5,
+      .hex-7 {
+        margin-top: 100px;
+      } */
+      .hex-1,
+      .hex-7 {
+        width: 100px;
+        height: 80px;
+      }
+
+      .middle-hexagon,
+      .third-hexagon,
+      .bottom-hexagon {
+        display: flex;
+        justify-content: center;
+      }
+      /* .top-hexagon .hex-3,
+      .top-hexagon .hex-5 {
+        margin-top: 100px;
+      } */
+      /* .middle-hexagon .hex-3,
+      .middle-hexagon .hex-5 {
+        margin-top: 50px;
+      }
+
+      .third-hexagon .hex-3,
+      .third-hexagon .hex-5 {
+        margin-top: 60px;
+      } */
+      .hex-1 .inner-hex,
+      .hex-7 .inner-hex {
+        width: 90px;
+        height: 70px;
+      }
+
+      .middle-hexagon .hex-4 .inner-hex img {
+        width: 90%;
+      }
+      /* ===== Base hidden state ===== */
+      .hexagon {
+        opacity: 0;
+        transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+          opacity 0.6s ease;
+      }
+
+      /* ===== TOP ROW ===== */
+      .top-hexagon .hex-1,
+      .top-hexagon .hex-3,
+      .top-hexagon .hex-5,
+      .top-hexagon .hex-7 {
+        transform: translateY(-300px);
+      }
+
+      .top-hexagon .hex-2,
+      .top-hexagon .hex-4,
+      .top-hexagon .hex-6 {
+        transform: translateY(-400px);
+      }
+
+      /* ===== MIDDLE LEFT SIDE ===== */
+      .middle-hexagon .hex-2,
+      .middle-hexagon .hex-3 {
+        transform: translateX(-400px);
+      }
+
+      /* ===== MIDDLE RIGHT SIDE ===== */
+      .middle-hexagon .hex-5,
+      .middle-hexagon .hex-6 {
+        transform: translateX(400px);
+      }
+
+      /* ===== THIRD ROW ===== */
+      .third-hexagon .hex-3 {
+        transform: translateX(-350px);
+      }
+
+      .third-hexagon .hex-5 {
+        transform: translateX(350px);
+      }
+
+      /* ===== BOTTOM HEX ===== */
+      .bottom-hexagon .hex-4 {
+        transform: translateY(350px);
+      }
+
+      /* ===== CENTER HEX (ZOOM) ===== */
+      .middle-hexagon .hex-4 {
+        opacity: 0;
+        transform: scale(0);
+        transition: none;
+      }
+      .hexagon.show {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+      }
+      @keyframes centerZoomBounce {
+        0% {
+          transform: scale(0);
+          opacity: 0;
+        }
+        60% {
+          transform: scale(1.25);
+          opacity: 1;
+        }
+        80% {
+          transform: scale(0.95);
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="hero">
+      <div class="hero-content">
+        <div class="hexagon-container">
+          <!-- top -->
+          <div class="top-hexagon">
+            <a href="#" class="hexagon hex-1">
+              <div class="inner-hex"></div>
+            </a>
+
+            <a href="#" class="hexagon hex-2">
+              <div class="inner-hex"></div>
+            </a>
+            <a href="#" class="hexagon hex-3">
+              <div class="inner-hex">
+                <img src="./img/3.png" alt="" />
+              </div>
+            </a>
+            <a href="#" class="hexagon hex-4">
+              <div class="inner-hex">
+                <img src="./img/ENT 3DD.png" alt="" />
+              </div>
+            </a>
+            <a href="#" class="hexagon hex-5">
+              <div class="inner-hex">
+                <img src="./img/Medical 3d.png" alt="" />
+              </div>
+            </a>
+            <a href="#" class="hexagon hex-6">
+              <div class="inner-hex"></div>
+            </a>
+            <a href="#" class="hexagon hex-7">
+              <div class="inner-hex"></div>
+            </a>
+          </div>
+          <!-- middle -->
+          <div class="middle-hexagon">
+            <a href="#" class="hexagon hex-2">
+              <div class="inner-hex"></div>
+            </a>
+            <a href="#" class="hexagon hex-3">
+              <div class="inner-hex">
+                <img src="./img/pediatric 3d.png" alt="" />
+              </div>
+            </a>
+            <a href="#" class="hexagon hex-4">
+              <div class="inner-hex">
+                <img src="./img/logo2.png" alt="" />
+              </div>
+            </a>
+            <a href="#" class="hexagon hex-5">
+              <div class="inner-hex">
+                <img src="./img/Dermatology 3D.png" alt="" />
+              </div>
+            </a>
+            <a href="#" class="hexagon hex-6">
+              <div class="inner-hex"></div>
+            </a>
+          </div>
+          <!-- third -->
+          <div class="third-hexagon">
+            <a href="#" class="hexagon hex-3">
+              <div class="inner-hex"></div>
+            </a>
+            <a href="#" class="hexagon hex-4">
+              <div class="inner-hex">
+                <img src="./img/OBG 3D.png" alt="" />
+              </div>
+            </a>
+            <a href="#" class="hexagon hex-5">
+              <div class="inner-hex"></div>
+            </a>
+          </div>
+          <!-- bottom -->
+          <div class="bottom-hexagon">
+            <a href="#" class="hexagon hex-4">
+              <div class="inner-hex"></div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <img class="overlay-dot" src="./img/dot.png" alt="" />
+      <img src="./img/block.png" class="overlay-block left-block" alt="" />
+      <img src="./img/block.png" class="overlay-block right-block" alt="" />
+    </div>
+
+    <script>
+      window.addEventListener("load", () => {
+        const allHex = document.querySelectorAll(".hexagon");
+        const centerHex = document.querySelector(".middle-hexagon .hex-4");
+
+        const outerHex = [...allHex].filter((hex) => hex !== centerHex);
+
+        // Animate outer hex in wave pattern
+        outerHex.forEach((hex, index) => {
+          setTimeout(() => {
+            hex.classList.add("show");
+          }, index * 120); // smooth stagger
+        });
+
+        // Center animation after outer complete
+        setTimeout(() => {
+          centerHex.style.animation = "centerZoomBounce 1s ease forwards";
+        }, outerHex.length * 120 + 300);
+      });
+    </script>
+  </body>
+</html>
