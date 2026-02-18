@@ -1111,11 +1111,27 @@ p {
 }
 
 /* MAP */
+.contact-map {
+  display: grid;
+  grid-template-columns: 1fr 0.5fr;
+  gap: 20px;
+}
 .contact-map iframe {
-  width: 50%;
   height: 320px;
   border: none;
   border-radius: 30px;
+}
+.qr-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-direction: column;
+}
+.qr-section img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
 }
 
 /* ===== RESPONSIVE ===== */
@@ -2423,4 +2439,30 @@ p {
   padding: 15px 25px;
   background-color: #7f8386;
   border-radius: 15px;
+}
+.share-btn {
+  padding: 10px 18px;
+  background: #3580b9;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.share-popup {
+  display: none;
+  position: absolute;
+  margin-top: 10px;
+  background: #fff;
+  box-shadow: 0 5px 20px rgba(35, 28, 133, 0.1);
+  padding: 12px;
+  border-radius: 8px;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.share-popup a {
+  text-decoration: none;
+  color: #0d0d0d;
+  font-weight: 500;
 }

@@ -1,3 +1,48 @@
+const shareBtn = document.getElementById("shareBtn");
+const sharePopup = document.getElementById("shareOptions");
+
+shareBtn.addEventListener("click", () => {
+  const url = "https://maps.app.goo.gl/a7knCTEr6iSEMExW7";
+  const text = document.title;
+
+  // If mobile supports native share
+  if (navigator.share) {
+    navigator
+      .share({
+        title: text,
+        text: text,
+        url: url,
+      })
+      .catch((err) => console.log(err));
+  } else {
+    // Show manual share options
+    sharePopup.style.display =
+      sharePopup.style.display === "flex" ? "none" : "flex";
+
+    document.getElementById(
+      "whatsappShare",
+    ).href = `https://wa.me/?text=${encodeURIComponent(text + " " + url)}`;
+
+    document.getElementById(
+      "facebookShare",
+    ).href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+      url,
+    )}`;
+
+    document.getElementById(
+      "twitterShare",
+    ).href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+      url,
+    )}&text=${encodeURIComponent(text)}`;
+
+    document.getElementById(
+      "linkedinShare",
+    ).href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+      url,
+    )}`;
+  }
+});
+
 class MenuComponent {
   constructor(menuSelector, triggerSelector) {
     this.menu = document.querySelector(menuSelector);
