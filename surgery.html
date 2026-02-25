@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Saravavan Hospital</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+
+    <link rel="stylesheet" href="./style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+
+  <body>
+    <canvas id="particles-bg"></canvas>
+
+    <div class="navbar">
+      <img src="./img/Logo.png" id="navLogo" />
+
+      <div class="nav-links">
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About Us</a></li>
+          <li class="services-btn">Services</li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+
+      <button class="book-btn">Book An Appointment</button>
+
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <section class="page-top-section">
+      <div class="page-top-section__content">
+        <h1>Surgery</h1>
+
+        <div class="page-left">
+          <img class="page-overlay" src="./img/Surgery 3d.png" alt="" />
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
+            inventore explicabo eaque, qui consequatur
+          </p>
+        </div>
+        <div class="page-ceter">
+          <img src="./img/surgery.png" alt="" />
+        </div>
+      </div>
+
+      <!-- SVG Shape -->
+      <div class="page-top-section__shape">
+        <svg
+          viewBox="0 0 1440 215"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0 40.0001C0 17.9087 17.9086 0 40 0H379.868C394.972 0 408.789 8.5079 415.587 21.9955L501.913 193.256C508.711 206.743 522.528 215.251 537.632 215.251H902.317C917.448 215.251 931.284 206.713 938.069 193.189L1023.93 22.0617C1030.72 8.53771 1044.55 0 1059.68 0H1400C1422.09 0 1440 17.9086 1440 40V215H0V40.0001Z"
+            fill="#E7E7E7"
+          />
+        </svg>
+      </div>
+    </section>
+    <section class="surgical-section">
+      <h2>Surgical Specialties</h2>
+
+      <div class="card-grid"></div>
+    </section>
+
+    <!-- MODAL (UNCHANGED) -->
+    <div class="modal" id="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img id="modalImg" />
+        <div class="modal-text">
+          <h2 id="modalTitle"></h2>
+          <p id="modalDesc"></p>
+          <button>Book Appointment</button>
+        </div>
+      </div>
+    </div>
+    <section class="why-container">
+      <div class="img-why">
+        <div class="why-img1">
+          <img src="./img/w1.png" alt="" />
+        </div>
+
+        <div class="why-img2">
+          <div class="why-img2-inner1">
+            <!-- Circle Badge -->
+            <div class="circle-con">
+              <div class="outer-circle">
+                <div class="text-circle" id="textCircle"></div>
+
+                <div class="inner-circle">
+                  <img src="./img/Logo.png" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="why-img2-inner2">
+            <img src="./img/w2.png" alt="" />
+          </div>
+        </div>
+      </div>
+
+      <div class="why-section-text">
+        <div class="why-heading">
+          <h2>Why Choose Us For Your Health Care Needs</h2>
+          <p>
+            When you choose Saravanan Hospitals, you're choosing a healthcare
+            partner that values your time, health, and peace of mind.
+          </p>
+        </div>
+
+        <div class="why-box-container">
+          <div class="why-box">
+            <div class="why-box-head">
+              <div class="why-box-icon">
+                <img src="img/i (2).png" alt="" />
+              </div>
+              <div class="why-box-num">01</div>
+            </div>
+            <div class="why-box-body">
+              <h3>Modern Diagnostic Lab</h3>
+              <p>
+                Our in-house laboratory is equipped with the latest diagnostic
+                tools, ensuring quick and accurate test results that help
+                doctors make informed decisions.
+              </p>
+            </div>
+          </div>
+
+          <div class="why-box">
+            <div class="why-box-head">
+              <div class="why-box-icon">
+                <img src="img/i (1).png" alt="" />
+              </div>
+              <div class="why-box-num">02</div>
+            </div>
+            <div class="why-box-body">
+              <h3>24/7 Pharmacy Services</h3>
+              <p>
+                No need to search for pharmacies late at night. Our on-site
+                pharmacy stocks all essential medications and is available round
+                the clock.
+              </p>
+            </div>
+          </div>
+
+          <div class="why-box">
+            <div class="why-box-head">
+              <div class="why-box-icon">
+                <img src="img/i (3).png" alt="" />
+              </div>
+              <div class="why-box-num">03</div>
+            </div>
+            <div class="why-box-body">
+              <h3>Efficient Emergency Response</h3>
+              <p>
+                During medical emergencies, every second counts. Our trained
+                emergency team responds swiftly with life-saving interventions
+                whenever you need
+              </p>
+            </div>
+          </div>
+
+          <div class="why-box">
+            <div class="why-box-head">
+              <div class="why-box-icon">
+                <img src="img/i (4).png" alt="" />
+              </div>
+              <div class="why-box-num">04</div>
+            </div>
+            <div class="why-box-body">
+              <h3>Affordable Healthcare</h3>
+              <p>
+                Quality healthcare shouldn't drain your savings. We offer
+                competitive pricing across all services while maintaining
+                clinical excellence.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="sub-menu">
+      <div class="menu-container">
+        <ul>
+          <li><a href="#">General Medicine</a></li>
+          <li><a href="#">Gynecology</a></li>
+          <li><a href="#">Surgery</a></li>
+          <li><a href="#">Pediatrics</a></li>
+          <li><a href="#">Dermatology</a></li>
+          <li><a href="#">ENT</a></li>
+          <li><a href="#">Yoga</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ====================================== -->
+    <section class="faq-section">
+      <h1 class="section-title">
+        FREQUENTLY
+        <span> ASKED QUESTIONS</span>
+      </h1>
+      <div class="faq-wrapper">
+        <!-- LEFT -->
+        <div class="faq-left">
+          <div>
+            <img src="./img/Rectangle 89.jpg.jpeg" class="img-back" alt="" />
+          </div>
+
+          <div class="img-front">
+            <img src="./img/Rectangle 90.jpg.jpeg" alt="" />
+          </div>
+        </div>
+        <!-- RIGHT -->
+        <div class="faq-right">
+          <div class="faq-item active">
+            <div class="faq-question">
+              What kind of medical services does Saravana Hospital provide?
+              <span>+</span>
+            </div>
+            <div class="faq-answer">
+              <p>
+                We're a multi-specialty hospital in Chennai offering surgical
+                care, maternity and fertility services, general medicine,
+                pediatrics, dermatology, and ENT treatment. We also have
+                in-house lab, scanning, pharmacy, and 24/7 emergency services.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              Do you have emergency services at night and on weekends?
+              <span>+</span>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Yes, our emergency department never closes. Critical cases are
+                seen immediately, and our goal is to have a doctor assess you
+                within 15-20 minutes of arrival.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              How do I book an appointment with a doctor?
+              <span>+</span>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Call our reception desk, use our online booking form, or walk in
+                during consultation hours. For urgent cases, we'll fit you in
+                the same day.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              Are vaccination services available for adults and children?
+
+              <span>+</span>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Yes, our vaccine center provides complete immunization for all
+                ages—from newborn vaccinations to adult boosters and travel
+                vaccines. Both pediatric and adult vaccination schedules are
+                available.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              Do you have lab and scan facilities or do I need to go somewhere
+              else?
+              <span>+</span>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Everything's here—diagnostic lab, X-ray, ultrasound, ECG,
+                pharmacy, and operation theatres. No need to travel elsewhere
+                for tests or treatment.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ====================================== -->
+    <section class="contact-section">
+      <!-- HEADER -->
+      <div class="contact-header">
+        <h1>CONTACT US</h1>
+        <h3>Get in Touch with Saravana Hospital</h3>
+        <p>
+          Have questions? Need to book an appointment? We're here to help. Reach
+          out to us through any of these channels, and our team will respond
+          promptly.
+        </p>
+      </div>
+
+      <!-- CONTENT -->
+      <div class="contact-content">
+        <!-- LEFT -->
+        <div class="contact-info">
+          <h4>Hospital Phone Numbers:</h4>
+          <p>04445065959 | 9787965959 | 9789085959</p>
+
+          <h4>Email:</h4>
+          <p>saravanahospital2025@gmail.com</p>
+
+          <h4>Hospital Address</h4>
+          <p>
+            No 12 Big Street, Ranga Nagar, Keelkattalai,<br />
+            Chennai - 600117
+          </p>
+        </div>
+
+        <!-- RIGHT -->
+        <form class="contact-form">
+          <input type="text" placeholder="Name" required />
+          <input type="email" placeholder="Email" required />
+          <input type="tel" placeholder="Phone number" />
+          <textarea placeholder="Message"></textarea>
+
+          <div class="form-actions">
+            <button type="submit" class="submit-btn">Submit</button>
+            <button type="reset" class="cancel-btn">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- MAP -->
+      <div class="contact-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.250554224529!2d80.1851113!3d12.955812699999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525f83f488df1f%3A0x58ddeb632de4687f!2sSARAVANAN%20SPECIALITY%20HOSPITAL!5e0!3m2!1sen!2sin!4v1770749815197!5m2!1sen!2sin"
+          width="100%"
+          height="450"
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+        <div class="qr-section">
+          <img src="./img/qr-code.png" alt="QR Code" />
+          <h3>Scan QR Code for Location</h3>
+          <button id="shareBtn" class="share-btn">
+            Share Location <i class="fa-solid fa-share"></i>
+          </button>
+
+          <div id="shareOptions" class="share-popup">
+            <a id="whatsappShare" target="_blank">WhatsApp</a>
+            <a id="facebookShare" target="_blank">Facebook</a>
+            <a id="twitterShare" target="_blank">Twitter</a>
+            <a id="linkedinShare" target="_blank">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ====================================== -->
+
+    <!--  -->
+
+    <footer class="footer">
+      <div class="footer-top">
+        <!-- COL 1 -->
+        <div>
+          <div class="logo">
+            <!-- Replace with real logo -->
+            <img src="./img/Logo.png" />
+          </div>
+
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+
+          <div class="social">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <!-- COL 2 -->
+        <div>
+          <h3>Quick Links</h3>
+          <ul>
+            <li>About us</li>
+            <li>Service</li>
+            <li>Contact</li>
+          </ul>
+        </div>
+
+        <!-- COL 3 -->
+        <div>
+          <h3>Our Service</h3>
+          <ul>
+            <li>Surgical Specialities</li>
+            <li>Maternity & Fertility</li>
+            <li>General Medicine</li>
+            <li>Pediatrics</li>
+            <li>Dermatology</li>
+            <li>ENT ( Ear, Nose, Throat )</li>
+          </ul>
+        </div>
+
+        <!-- COL 4 -->
+        <div>
+          <h3>Our Service</h3>
+
+          <div class="contact-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+
+          <div class="contact-item">
+            <i class="fa-solid fa-phone"></i>
+            <p>Lorem ipsum dolor sit amet</p>
+          </div>
+
+          <div class="contact-item">
+            <i class="fa-solid fa-envelope"></i>
+            <p>Lorem ipsum dolor sit amet</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- DIVIDER -->
+      <div class="footer-divider"></div>
+
+      <!-- BOTTOM -->
+      <div class="footer-bottom">
+        <p>
+          2026 Saravanan speciality hospital. All rights reserved || Design and
+          developed by <a href="#">DGrow Marketing Agency</a>
+        </p>
+
+        <div class="footer-links">
+          <a href="#">Term of Service</a>
+          <a href="#">Privacy Policy</a>
+        </div>
+      </div>
+    </footer>
+    <!--  -->
+
+    <script src="./script.js"></script>
+  </body>
+</html>

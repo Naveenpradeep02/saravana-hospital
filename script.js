@@ -1,3 +1,169 @@
+function initCircleText() {
+  const textCircle = document.getElementById("textCircle");
+  if (!textCircle) return;
+
+  const text = "CERTIFIED MEDICAL EXCELLENCE ";
+  const letters = text.split("");
+
+  textCircle.innerHTML = "";
+
+  letters.forEach((letter, i) => {
+    const span = document.createElement("span");
+    span.innerText = letter;
+    span.style.transform = `rotate(${i * (360 / letters.length)}deg)`;
+    textCircle.appendChild(span);
+  });
+}
+
+initCircleText();
+// ===========================
+const servicess = [
+  {
+    title: "General Surgery",
+    img: "./img/Surgery 3d.png",
+    short:
+      "Comprehensive surgical care for abdominal and soft tissue conditions.",
+    full: "General surgery includes procedures involving the digestive tract, skin, soft tissues and emergency surgical interventions. Our team ensures safe, minimally invasive, and patient-focused surgical care.",
+  },
+  {
+    title: "Laparoscopic Surgery",
+    img: "./img/Surgery 3d.png",
+
+    short: "Minimally invasive surgery with faster recovery.",
+    full: "Laparoscopic surgery uses small incisions and advanced camera systems to treat abdominal conditions with reduced pain, minimal scarring and quicker recovery time.",
+  },
+  {
+    title: "Laser Surgery",
+    img: "./img/Surgery 3d.png",
+
+    short: "Precision laser procedures for faster healing.",
+    full: "Laser surgery offers high precision treatment with minimal bleeding and reduced recovery time. Commonly used in piles, varicose veins and dermatological procedures.",
+  },
+  {
+    title: "Plastic Surgery",
+    img: "./img/Surgery 3d.png",
+
+    short: "Reconstructive and cosmetic enhancement procedures.",
+    full: "Plastic surgery includes reconstructive procedures for trauma and cosmetic surgeries to enhance physical appearance with advanced techniques.",
+  },
+  {
+    title: "Gastrointestinal Surgery",
+    img: "./img/Surgery 3d.png",
+
+    short: "Advanced digestive system surgeries.",
+    full: "GI surgery treats disorders of stomach, intestines, liver, pancreas and colon using modern surgical techniques.",
+  },
+  {
+    title: "Kidney Stone Surgery",
+    img: "./img/Surgery 3d.png",
+
+    short: "Advanced treatment for renal stones.",
+    full: "Minimally invasive kidney stone removal using laser lithotripsy and endoscopic procedures ensuring quick recovery.",
+  },
+  {
+    title: "Paediatric Surgery",
+    img: "./img/Surgery 3d.png",
+
+    short: "Specialized surgical care for children.",
+    full: "Paediatric surgery provides expert care for congenital and acquired conditions in infants and children.",
+  },
+  {
+    title: "Onco Surgery (Cancer)",
+    img: "./img/Surgery 3d.png",
+
+    short: "Comprehensive cancer surgical treatment.",
+    full: "Onco surgery focuses on tumor removal and cancer management using evidence-based surgical oncology practices.",
+  },
+  {
+    title: "Vascular Surgery",
+    img: "./img/Surgery 3d.png",
+
+    short: "Treatment for blood vessel disorders.",
+    full: "Vascular surgery treats varicose veins, arterial blockages and circulatory disorders using advanced minimally invasive techniques.",
+  },
+  {
+    title: "Hernia Surgery",
+    img: "./img/Surgery 3d.png",
+
+    short: "Safe and effective hernia repair.",
+    full: "Hernia surgery includes laparoscopic and open repair techniques ensuring reduced recurrence and faster healing.",
+  },
+  {
+    title: "Circumcision Surgery",
+    img: "./img/Surgery 3d.png",
+
+    short: "Safe and hygienic circumcision procedures.",
+    full: "Performed using advanced surgical or laser techniques ensuring minimal discomfort and quick recovery.",
+  },
+  {
+    title: "Piles Surgery (Proctology)",
+    img: "./img/Surgery 3d.png",
+
+    short: "Advanced treatment for hemorrhoids.",
+    full: "Laser and minimally invasive procedures for piles ensuring painless treatment and faster return to normal life.",
+  },
+  {
+    title: "Diabetic Foot Surgery",
+    img: "./img/Surgery 3d.png",
+
+    short: "Specialized care for diabetic foot complications.",
+    full: "Surgical management of diabetic foot ulcers and infections preventing complications and amputation.",
+  },
+  {
+    title: "Thyroid & Breast Surgery",
+    img: "./img/Surgery 3d.png",
+
+    short: "Expert endocrine and breast procedures.",
+    full: "Comprehensive thyroid and breast surgeries including tumor removal, biopsy and minimally invasive procedures.",
+  },
+];
+
+const grid = document.querySelector(".card-grid");
+
+servicess.forEach((service) => {
+  grid.innerHTML += `
+  <article class="card">
+    <div class="card-inner">
+
+      <div class="card-front">
+        <img src="${service.img}" alt="${service.title}">
+        <div class="card-content">
+          <h3>${service.title}</h3>
+          <p>${service.short}</p>
+        </div>
+      </div>
+
+      <div class="card-back">
+        <h3>${service.title}</h3>
+        <p>${service.short}</p>
+        <button onclick="openModal('${service.title}','${service.full}','${service.img}')">
+        View Details
+        </button>
+      </div>
+
+    </div>
+  </article>`;
+});
+
+function openModal(title, desc, img) {
+  document.getElementById("modalTitle").innerText = title;
+  document.getElementById("modalDesc").innerText = desc;
+  document.getElementById("modalImg").src = img;
+  document.getElementById("modal").style.display = "flex";
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+  document.body.style.overflow = "auto";
+}
+
+window.onclick = function (e) {
+  if (e.target == document.getElementById("modal")) {
+    closeModal();
+  }
+};
+// ===========================
 const shareBtn = document.getElementById("shareBtn");
 const sharePopup = document.getElementById("shareOptions");
 
@@ -42,7 +208,35 @@ shareBtn.addEventListener("click", () => {
     )}`;
   }
 });
+// =====================
 
+const faqItems = document.querySelectorAll(".faq-item");
+
+faqItems.forEach((item) => {
+  item.addEventListener("click", () => {
+    faqItems.forEach((i) => {
+      if (i !== item) {
+        i.classList.remove("active");
+        i.querySelector(".faq-answer").style.maxHeight = null;
+      }
+    });
+
+    item.classList.toggle("active");
+    const answer = item.querySelector(".faq-answer");
+
+    if (item.classList.contains("active")) {
+      answer.style.maxHeight = answer.scrollHeight + "px";
+    } else {
+      answer.style.maxHeight = null;
+    }
+  });
+});
+
+const firstAnswer = document.querySelector(".faq-item.active .faq-answer");
+if (firstAnswer) {
+  firstAnswer.style.maxHeight = firstAnswer.scrollHeight + "px";
+}
+// =====================================
 class MenuComponent {
   constructor(menuSelector, triggerSelector) {
     this.menu = document.querySelector(menuSelector);
@@ -99,113 +293,147 @@ const navLogo = document.getElementById("navLogo");
 const welcomeLogo = document.getElementById("welcomeLogo");
 
 /* ===== ENTRY PLAY ONCE ===== */
+function simplePageLoader() {
+  const loader = document.createElement("div");
+  loader.className = "simple-loader";
+  loader.innerHTML = `<div class="spinner"></div>`;
+  document.body.appendChild(loader);
 
-if (sessionStorage.getItem("entryDone")) {
-  entryOverlay.style.display = "none";
-  home.style.opacity = 1;
-
-  // 🔥 trigger hex animation on reload
-  setTimeout(() => {
-    startHexAnimation();
-  }, 200);
-} else {
-  sessionStorage.setItem("entryDone", "1");
-
-  const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-  /* petals bloom */
-  tl.to(".petal-img", {
-    opacity: 1,
-    scale: 1,
-    rotate: (i, el) => getComputedStyle(el).getPropertyValue("--r"),
-    duration: 1.5,
-    stagger: 0.1,
+  window.addEventListener("load", () => {
+    loader.classList.add("fade-out");
+    setTimeout(() => loader.remove(), 600);
   });
+}
+const isHomePage = document.body.classList.contains("home-page");
 
-  /* center pop */
-  tl.to(".center-img", {
-    opacity: 1,
-    scale: 1.35,
-    duration: 0.6,
-  });
+if (isHomePage) {
+  // ===== FULL HOME INTRO =====
+  if (sessionStorage.getItem("entryDone")) {
+    entryOverlay.style.display = "none";
+    home.style.opacity = 1;
 
-  tl.to(".center-img", {
-    scale: 1,
-    duration: 0.6,
-  });
+    // 🔥 trigger hex animation on reload
+    setTimeout(() => {
+      startHexAnimation();
+    }, 200);
+  } else {
+    sessionStorage.setItem("entryDone", "1");
 
-  /* plus pop */
-  tl.to(
-    ".plus-main",
-    {
+    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+    /* petals bloom */
+    tl.to(".petal-img", {
       opacity: 1,
       scale: 1,
-      duration: 0.8,
-    },
-    "-=0.3",
-  );
-
-  /* flip logo out */
-  tl.to(
-    "#logo",
-    {
-      rotateY: 180,
-      opacity: 0,
+      rotate: (i, el) => getComputedStyle(el).getPropertyValue("--r"),
       duration: 1.5,
-      ease: "power2.inOut",
-    },
-    "+=0.4",
-  );
+      stagger: 0.1,
+    });
 
-  /* welcome text */
-  tl.to("#welcome", {
-    opacity: 1,
-    y: -20,
-    duration: 0.8,
-  });
+    /* center pop */
+    tl.to(".center-img", {
+      opacity: 1,
+      scale: 1.35,
+      duration: 0.6,
+    });
 
-  /* move logo to navbar */
-  tl.to("#welcomeLogo", {
-    duration: 1.2,
-    scale: 0.5,
-    ease: "power3.inOut",
-    x: () =>
-      navLogo.getBoundingClientRect().left -
-      welcomeLogo.getBoundingClientRect().left,
-    y: () =>
-      navLogo.getBoundingClientRect().top -
-      welcomeLogo.getBoundingClientRect().top,
-  });
+    tl.to(".center-img", {
+      scale: 1,
+      duration: 0.6,
+    });
 
-  /* fade overlay */
-  tl.to("#entryOverlay", { opacity: 0, duration: 0.6 });
-  tl.set("#entryOverlay", { display: "none" });
-  // tl.to("#home", { opacity: 1, duration: 0.6 });
-  tl.to("#home", {
-    opacity: 1,
-    duration: 0.6,
-    onComplete: startHexAnimation,
-  });
+    /* plus pop */
+    tl.to(
+      ".plus-main",
+      {
+        opacity: 1,
+        scale: 1,
+        duration: 0.8,
+      },
+      "-=0.3",
+    );
+
+    /* flip logo out */
+    tl.to(
+      "#logo",
+      {
+        rotateY: 180,
+        opacity: 0,
+        duration: 1.5,
+        ease: "power2.inOut",
+      },
+      "+=0.4",
+    );
+
+    /* welcome text */
+    tl.to("#welcome", {
+      opacity: 1,
+      y: -20,
+      duration: 0.8,
+    });
+
+    /* move logo to navbar */
+    tl.to("#welcomeLogo", {
+      duration: 1.2,
+      scale: 0.5,
+      ease: "power3.inOut",
+      x: () =>
+        navLogo.getBoundingClientRect().left -
+        welcomeLogo.getBoundingClientRect().left,
+      y: () =>
+        navLogo.getBoundingClientRect().top -
+        welcomeLogo.getBoundingClientRect().top,
+    });
+
+    /* fade overlay */
+    tl.to("#entryOverlay", { opacity: 0, duration: 0.6 });
+    tl.set("#entryOverlay", { display: "none" });
+    // tl.to("#home", { opacity: 1, duration: 0.6 });
+    tl.to("#home", {
+      opacity: 1,
+      duration: 0.6,
+      onComplete: startHexAnimation,
+    });
+  }
+} else {
+  simplePageLoader();
 }
 
 // ==================
+// function startHexAnimation() {
+//   const allHex = document.querySelectorAll(".hexagon");
+//   const centerHex = document.querySelector(".middle-hexagon .hex-4");
+
+//   const outerHex = [...allHex].filter((hex) => hex !== centerHex);
+
+//   // ALL outer hex animate at same time
+//   outerHex.forEach((hex) => {
+//     hex.classList.add("show");
+//     hex.style.animation = "hexImpact 1.2s cubic-bezier(0.16, 1, 0.3, 1)";
+//   });
+
+//   // Center comes slightly delayed for climax
+//   setTimeout(() => {
+//     centerHex.style.animation =
+//       "centerZoomBounce 1.3s cubic-bezier(0.16, 1, 0.3, 1) forwards";
+//   }, 600);
+// }
 function startHexAnimation() {
   const allHex = document.querySelectorAll(".hexagon");
   const centerHex = document.querySelector(".middle-hexagon .hex-4");
 
   const outerHex = [...allHex].filter((hex) => hex !== centerHex);
 
-  // Direction-based stagger
-  outerHex.forEach((hex, index) => {
-    setTimeout(() => {
-      hex.classList.add("show");
-    }, index * 120);
+  // ALL outer hex come at same time
+  outerHex.forEach((hex) => {
+    hex.classList.add("show");
   });
 
-  // Center zoom bounce after outer
+  // Center dramatic zoom after 0.7s
   setTimeout(() => {
-    centerHex.style.animation = "centerZoomBounce 1s ease forwards";
-  }, outerHex.length * 120 + 300);
+    centerHex.style.animation =
+      "centerZoomBounce 1.2s cubic-bezier(0.16,1,0.3,1) forwards";
+  }, 900);
 }
 
 /* ===== about us===== */
@@ -343,35 +571,7 @@ function restartAuto() {
 
 render();
 restartAuto();
-// =====================
 
-const faqItems = document.querySelectorAll(".faq-item");
-
-faqItems.forEach((item) => {
-  item.addEventListener("click", () => {
-    faqItems.forEach((i) => {
-      if (i !== item) {
-        i.classList.remove("active");
-        i.querySelector(".faq-answer").style.maxHeight = null;
-      }
-    });
-
-    item.classList.toggle("active");
-    const answer = item.querySelector(".faq-answer");
-
-    if (item.classList.contains("active")) {
-      answer.style.maxHeight = answer.scrollHeight + "px";
-    } else {
-      answer.style.maxHeight = null;
-    }
-  });
-});
-
-const firstAnswer = document.querySelector(".faq-item.active .faq-answer");
-if (firstAnswer) {
-  firstAnswer.style.maxHeight = firstAnswer.scrollHeight + "px";
-}
-// =====================================
 // =====================================
 // =====================================
 const canvas = document.getElementById("particles-bg");
@@ -388,9 +588,9 @@ class Particle {
   constructor() {
     this.x = Math.random() * canvas.width;
     this.y = Math.random() * canvas.height;
-    this.size = Math.random() * 2 + 2;
-    this.speedX = (Math.random() - 0.5) * 0.4;
-    this.speedY = (Math.random() - 0.5) * 0.4;
+    this.size = Math.random() * 4 + 4;
+    this.speedX = (Math.random() - 0.3) * 0.3;
+    this.speedY = (Math.random() - 0.3) * 0.3;
     this.color = colors[Math.floor(Math.random() * colors.length)];
   }
 
@@ -417,7 +617,7 @@ class Particle {
 
 function init() {
   particlesArray = [];
-  for (let i = 0; i < 60; i++) {
+  for (let i = 0; i < 15; i++) {
     particlesArray.push(new Particle());
   }
 }
@@ -777,3 +977,33 @@ hexBlocks.forEach((hex, index) => {
 //   document.querySelector(".main-service-content").style.transform =
 //     "translateY(0)";
 // });
+const boxes = document.querySelectorAll(".why-choose-box");
+const mainText = document.getElementById("mainText");
+
+let index = 0;
+let interval;
+
+function changeContent(i) {
+  boxes.forEach((box) => box.classList.remove("active"));
+  boxes[i].classList.add("active");
+  mainText.textContent = boxes[i].dataset.text;
+  index = i;
+}
+
+boxes.forEach((box, i) => {
+  box.addEventListener("click", () => {
+    changeContent(i);
+    resetAutoSlide();
+  });
+});
+
+function autoSlide() {
+  index++;
+  if (index >= boxes.length) index = 0;
+  changeContent(index);
+}
+
+function resetAutoSlide() {
+  clearInterval(interval);
+  interval = setInterval(autoSlide, 4000);
+}

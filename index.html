@@ -18,7 +18,7 @@
     />
   </head>
 
-  <body>
+  <body class="home-page">
     <canvas id="particles-bg"></canvas>
 
     <!-- ================= ENTRY ================= -->
@@ -170,6 +170,9 @@
             </div>
             <!-- third -->
             <div class="third-hexagon">
+              <!-- <a href="#" class="hexagon hex-2">
+                <div class="inner-hex"></div>
+              </a> -->
               <a href="#" class="hexagon hex-3">
                 <div class="inner-hex"></div>
               </a>
@@ -181,10 +184,19 @@
               <a href="#" class="hexagon hex-5">
                 <div class="inner-hex"></div>
               </a>
+              <!-- <a href="#" class="hexagon hex-6">
+                <div class="inner-hex"></div>
+              </a> -->
             </div>
             <!-- bottom -->
             <div class="bottom-hexagon">
+              <a href="#" class="hexagon hex-3">
+                <div class="inner-hex"></div>
+              </a>
               <a href="#" class="hexagon hex-4">
+                <div class="inner-hex"></div>
+              </a>
+              <a href="#" class="hexagon hex-5">
                 <div class="inner-hex"></div>
               </a>
             </div>
@@ -400,6 +412,7 @@
           </div>
         </div>
       </section>
+
       <!-- ====================================== -->
       <section class="card-section">
         <!-- LEFT -->
@@ -503,6 +516,125 @@
           </div>
         </div>
       </section>
+      <!-- ====================================== -->
+      <div class="why-choose">
+        <h2 class="why-choose-heading">Treatment Capabilities Overview</h2>
+
+        <div class="why-choose-container">
+          <div class="why-choose-main-box">
+            <p id="mainText">
+              Elective procedures include planned surgeries that are not
+              emergencies but require professional medical care.
+            </p>
+          </div>
+
+          <div class="why-choose-boxes">
+            <div
+              class="why-choose-box active"
+              data-text="Elective procedures include planned surgeries that are not emergencies but require professional medical care."
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="100"
+                height="100"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-hospital-icon lucide-hospital"
+              >
+                <path d="M12 7v4" />
+                <path d="M14 21v-3a2 2 0 0 0-4 0v3" />
+                <path d="M14 9h-4" />
+                <path
+                  d="M18 11h2a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2h2"
+                />
+                <path d="M18 21V5a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16" />
+              </svg>
+              Elective procedures
+            </div>
+
+            <div
+              class="why-choose-box"
+              data-text="Emergency procedures are critical treatments performed immediately to save life or prevent serious complications."
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="100"
+                height="100"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-activity-icon lucide-activity"
+              >
+                <path
+                  d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"
+                />
+              </svg>
+              Emergency procedures
+            </div>
+
+            <div
+              class="why-choose-box"
+              data-text="Day care surgeries allow patients to return home the same day after undergoing minor surgical procedures."
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="100"
+                height="100"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-stethoscope-icon lucide-stethoscope"
+              >
+                <path d="M11 2v2" />
+                <path d="M5 2v2" />
+                <path
+                  d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"
+                />
+                <path d="M8 15a6 6 0 0 0 12 0v-3" />
+                <circle cx="20" cy="10" r="2" />
+              </svg>
+              Day care surgeries
+            </div>
+
+            <div
+              class="why-choose-box"
+              data-text=" Many places claim 24/7 service but lack proper emergency infrastructure. We maintain fully staffed emergency departments with immediate surgical backup when needed."
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="100"
+                height="100"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-briefcase-medical-icon lucide-briefcase-medical"
+              >
+                <path d="M12 11v4" />
+                <path d="M14 13h-4" />
+                <path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                <path d="M18 6v14" />
+                <path d="M6 6v14" />
+                <rect width="20" height="14" x="2" y="6" rx="2" />
+              </svg>
+              Real Emergency Readiness
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ====================================== -->
       <!-- ====================================== -->
       <section class="faq-section">
         <h1 class="section-title">
@@ -653,7 +785,8 @@
             referrerpolicy="no-referrer-when-downgrade"
           ></iframe>
           <div class="qr-section">
-            <img src="./img/qr.png" alt="QR Code" />
+            <img src="./img/qr-code.png" alt="QR Code" />
+            <h3>Scan QR Code for Location</h3>
             <button id="shareBtn" class="share-btn">
               Share Location <i class="fa-solid fa-share"></i>
             </button>

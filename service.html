@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why Section</title>
+  <link rel="stylesheet" href="service.css" />
+</head>
+<body>
+
+<section class="why-container">
+  <div class="img-why">
+    <div class="why-img1">
+      <img src="img/w2.png" alt="">
+    </div>
+
+    <div class="why-img2">
+      <div class="why-img2-inner1">
+        <!-- Circle Badge -->
+        <div class="circle-con">
+          <div class="outer-circle">
+            <div class="text-circle" id="textCircle"></div>
+
+            <div class="inner-circle">
+              <h1>20+</h1>
+              <p>Years</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="why-img2-inner2">
+        <img src="img/w1.png" alt="">
+      </div>
+    </div>
+  </div>
+
+  <div class="why-section-text">
+    <div class="why-heading">
+      <h4>The Carewell Advantage</h4>
+      <h2>Why Choose Us For Your Health Care Needs</h2>
+      <p>
+        When you choose Carewell Hospitals, you're choosing a healthcare
+        partner that values your time, health, and peace of mind.
+      </p>
+    </div>
+
+    <div class="why-box-container">
+
+      <div class="why-box">
+        <div class="why-box-head">
+          <div class="why-box-icon">
+            <img src="img/i (2).png" alt="">
+          </div>
+          <div class="why-box-num">01</div>
+        </div>
+        <div class="why-box-body">
+          <h3>Modern Diagnostic Lab</h3>
+          <p>
+            Our in-house laboratory is equipped with the latest diagnostic
+            tools, ensuring quick and accurate test results that help
+            doctors make informed decisions.
+          </p>
+        </div>
+      </div>
+
+      <div class="why-box">
+        <div class="why-box-head">
+          <div class="why-box-icon">
+            <img src="img/i (1).png" alt="">
+          </div>
+          <div class="why-box-num">02</div>
+        </div>
+        <div class="why-box-body">
+          <h3>24/7 Pharmacy Services</h3>
+          <p>
+            No need to search for pharmacies late at night. Our on-site
+            pharmacy stocks all essential medications and is available
+            round the clock.
+          </p>
+        </div>
+      </div>
+
+      <div class="why-box">
+        <div class="why-box-head">
+          <div class="why-box-icon">
+            <img src="img/i (3).png" alt="">
+          </div>
+          <div class="why-box-num">03</div>
+        </div>
+        <div class="why-box-body">
+          <h3>Efficient Emergency Response</h3>
+          <p>
+            During medical emergencies, every second counts. Our trained
+            emergency team responds swiftly with life-saving interventions
+            whenever you need
+          </p>
+        </div>
+      </div>
+
+      <div class="why-box">
+        <div class="why-box-head">
+          <div class="why-box-icon">
+            <img src="img/i (4).png" alt="">
+          </div>
+          <div class="why-box-num">04</div>
+        </div>
+        <div class="why-box-body">
+          <h3>Affordable Healthcare</h3>
+          <p>
+            Quality healthcare shouldn't drain your savings. We offer
+            competitive pricing across all services while maintaining
+            clinical excellence.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="speciality-section">
+  <h2 class="bg-word bg-word-left">SPECIALITY</h2>
+  <h2 class="bg-word bg-word-right">HOSPITAL</h2>
+
+  <div class="speciality-shell">
+    <div class="speciality-left">
+      <article class="experience-card">
+        <div class="experience-thumb">
+          <img src="img/w2.png" alt="Doctor at work">
+        </div>
+        <h3>20+</h3>
+        <h4>Years of Experience</h4>
+        <p>
+          With over 20+ years of experience in the medical field, committed to
+          healing lives with knowledge, care, and compassion.
+        </p>
+      </article>
+
+      <article class="left-note-card">
+        
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+        <h5>Lorem ipsum dolor sit amet.</h5>
+      </article>
+    </div>
+
+    <div class="speciality-center">
+      <img src="img/Rectangle 90.jpg" alt="Hospital doctor" class="doctor-main">
+      <div class="center-action">
+        <button type="button">Explore More</button>
+        <h3>TRAUMA &amp; EMERGENCY 24x7</h3>
+      </div>
+    </div>
+
+    <div class="speciality-right">
+      <article class="metric-card">
+        <button type="button">Lorem ipsum</button>
+        <h3>20+M</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <a href="#">View <span>&#8250;</span></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script>
+  const text = "CERTIFIED MEDICAL EXCELLENCE ";
+  const textCircle = document.getElementById("textCircle");
+
+  const letters = text.split("");
+
+  letters.forEach((letter, i) => {
+    const span = document.createElement("span");
+    span.innerText = letter;
+
+    span.style.transform = `rotate(${i * (360 / letters.length)}deg)`;
+
+    textCircle.appendChild(span);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+      Surgical Specialties | Advanced General & Laparoscopic Surgery
+    </title>
+    <meta
+      name="description"
+      content="Comprehensive surgical specialties including General Surgery, Laparoscopic Surgery, Gastrointestinal Surgery, Cancer Surgery, Plastic Surgery, Vascular Surgery, Hernia, Thyroid & Breast procedures."
+    />
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #f5f7fa;
+      }
+
+      /* SECTION */
+      .surgical-section {
+        padding: 60px 5%;
+        text-align: center;
+      }
+
+      .surgical-section h2 {
+        font-size: 36px;
+        margin-bottom: 40px;
+        color: #1b3c74;
+      }
+
+      /* GRID */
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+      }
+
+      /* FLIP CARD */
+      .card {
+        perspective: 1000px;
+      }
+
+      .card-inner {
+        position: relative;
+        width: 100%;
+        height: 350px;
+        transition: transform 0.8s;
+        transform-style: preserve-3d;
+      }
+
+      .card:hover .card-inner {
+        transform: rotateY(180deg);
+      }
+
+      .card-front,
+      .card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      }
+
+      /* FRONT */
+      .card-front {
+        background: #fff;
+      }
+
+      .card-front img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .card-content {
+        padding: 20px;
+      }
+
+      .card-front h3 {
+        color: #1b3c74;
+        margin-bottom: 10px;
+      }
+
+      .card-front p {
+        font-size: 14px;
+        color: #555;
+      }
+
+      /* BACK */
+      .card-back {
+        background: #1b3c74;
+        color: #fff;
+        transform: rotateY(180deg);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .card-back button {
+        padding: 8px 18px;
+        background: #fff;
+        color: #1b3c74;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 15px;
+      }
+
+      /* MODAL (UNCHANGED) */
+      .modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .modal-content {
+        background: #fff;
+        max-width: 900px;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .modal img {
+        width: 50%;
+        object-fit: cover;
+      }
+
+      .modal-text {
+        padding: 30px;
+        width: 50%;
+      }
+
+      .close {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 28px;
+        cursor: pointer;
+      }
+
+      @media (max-width: 768px) {
+        .modal img,
+        .modal-text {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <section class="surgical-section">
+      <h2>Surgical Specialties</h2>
+
+      <div class="card-grid"></div>
+    </section>
+
+    <!-- MODAL (UNCHANGED) -->
+    <div class="modal" id="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img id="modalImg" />
+        <div class="modal-text">
+          <h2 id="modalTitle"></h2>
+          <p id="modalDesc"></p>
+          <button>Book Appointment</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const services = [
+        {
+          title: "General Surgery",
+          img: "https://images.unsplash.com/photo-1588771930296-88c2cb03f386",
+          short:
+            "Comprehensive surgical care for abdominal and soft tissue conditions.",
+          full: "General surgery includes procedures involving the digestive tract, skin, soft tissues and emergency surgical interventions. Our team ensures safe, minimally invasive, and patient-focused surgical care.",
+        },
+        {
+          title: "Laparoscopic Surgery",
+          img: "https://images.unsplash.com/photo-1581594693702-fbdc51b2763b",
+          short: "Minimally invasive surgery with faster recovery.",
+          full: "Laparoscopic surgery uses small incisions and advanced camera systems to treat abdominal conditions with reduced pain, minimal scarring and quicker recovery time.",
+        },
+        {
+          title: "Laser Surgery",
+          img: "https://images.unsplash.com/photo-1579684385127-1ef15d508118",
+          short: "Precision laser procedures for faster healing.",
+          full: "Laser surgery offers high precision treatment with minimal bleeding and reduced recovery time. Commonly used in piles, varicose veins and dermatological procedures.",
+        },
+        {
+          title: "Plastic Surgery",
+          img: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db",
+          short: "Reconstructive and cosmetic enhancement procedures.",
+          full: "Plastic surgery includes reconstructive procedures for trauma and cosmetic surgeries to enhance physical appearance with advanced techniques.",
+        },
+        {
+          title: "Gastrointestinal Surgery",
+          img: "https://images.unsplash.com/photo-1580281658629-33b49f2bcb20",
+          short: "Advanced digestive system surgeries.",
+          full: "GI surgery treats disorders of stomach, intestines, liver, pancreas and colon using modern surgical techniques.",
+        },
+        {
+          title: "Kidney Stone Surgery",
+          img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef",
+          short: "Advanced treatment for renal stones.",
+          full: "Minimally invasive kidney stone removal using laser lithotripsy and endoscopic procedures ensuring quick recovery.",
+        },
+        {
+          title: "Paediatric Surgery",
+          img: "https://images.unsplash.com/photo-1580281780460-82d277fdc0c0",
+          short: "Specialized surgical care for children.",
+          full: "Paediatric surgery provides expert care for congenital and acquired conditions in infants and children.",
+        },
+        {
+          title: "Onco Surgery (Cancer)",
+          img: "https://images.unsplash.com/photo-1581090700227-1e8eaa8d6d94",
+          short: "Comprehensive cancer surgical treatment.",
+          full: "Onco surgery focuses on tumor removal and cancer management using evidence-based surgical oncology practices.",
+        },
+        {
+          title: "Vascular Surgery",
+          img: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5",
+          short: "Treatment for blood vessel disorders.",
+          full: "Vascular surgery treats varicose veins, arterial blockages and circulatory disorders using advanced minimally invasive techniques.",
+        },
+        {
+          title: "Hernia Surgery",
+          img: "https://images.unsplash.com/photo-1580281657527-47f249e3f1e6",
+          short: "Safe and effective hernia repair.",
+          full: "Hernia surgery includes laparoscopic and open repair techniques ensuring reduced recurrence and faster healing.",
+        },
+        {
+          title: "Circumcision Surgery",
+          img: "https://images.unsplash.com/photo-1580281658016-9e33d7b5e7f3",
+          short: "Safe and hygienic circumcision procedures.",
+          full: "Performed using advanced surgical or laser techniques ensuring minimal discomfort and quick recovery.",
+        },
+        {
+          title: "Piles Surgery (Proctology)",
+          img: "https://images.unsplash.com/photo-1588776813953-632e4d83f63d",
+          short: "Advanced treatment for hemorrhoids.",
+          full: "Laser and minimally invasive procedures for piles ensuring painless treatment and faster return to normal life.",
+        },
+        {
+          title: "Diabetic Foot Surgery",
+          img: "https://images.unsplash.com/photo-1580281658065-9d8a6f1c5e0d",
+          short: "Specialized care for diabetic foot complications.",
+          full: "Surgical management of diabetic foot ulcers and infections preventing complications and amputation.",
+        },
+        {
+          title: "Thyroid & Breast Surgery",
+          img: "https://images.unsplash.com/photo-1581092334447-5b36f4d3e3f1",
+          short: "Expert endocrine and breast procedures.",
+          full: "Comprehensive thyroid and breast surgeries including tumor removal, biopsy and minimally invasive procedures.",
+        },
+      ];
+
+      const grid = document.querySelector(".card-grid");
+
+      services.forEach((service) => {
+        grid.innerHTML += `
+  <article class="card">
+    <div class="card-inner">
+
+      <div class="card-front">
+        <img src="${service.img}" alt="${service.title}">
+        <div class="card-content">
+          <h3>${service.title}</h3>
+          <p>${service.short}</p>
+        </div>
+      </div>
+
+      <div class="card-back">
+        <h3>${service.title}</h3>
+        <p>${service.short}</p>
+        <button onclick="openModal('${service.title}','${service.full}','${service.img}')">
+        View Details
+        </button>
+      </div>
+
+    </div>
+  </article>`;
+      });
+
+      function openModal(title, desc, img) {
+        document.getElementById("modalTitle").innerText = title;
+        document.getElementById("modalDesc").innerText = desc;
+        document.getElementById("modalImg").src = img;
+        document.getElementById("modal").style.display = "flex";
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal() {
+        document.getElementById("modal").style.display = "none";
+        document.body.style.overflow = "auto";
+      }
+
+      window.onclick = function (e) {
+        if (e.target == document.getElementById("modal")) {
+          closeModal();
+        }
+      };
+    </script>
+  </body>
+</html>
